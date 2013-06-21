@@ -297,6 +297,7 @@ top_srcdir = @top_srcdir@
 SUBDIRS = include src test examples
 ACLOCAL_AMFLAGS = -I autotools
 DISTCHECK_CONFIGURE_FLAGS = "--with-gtestoptions=@GTEST_OUTPUT@"
+EXTRA_DIST = autotools VERSION
 all: all-recursive
 
 .SUFFIXES:
@@ -652,15 +653,6 @@ distuninstallcheck:
 	        fi ; \
 	        $(distuninstallcheck_listfiles) ; \
 	        exit 1; } >&2
-distcleancheck: distclean
-	@if test '$(srcdir)' = . ; then \
-	  echo "ERROR: distcleancheck can only run from a VPATH build" ; \
-	  exit 1 ; \
-	fi
-	@test `$(distcleancheck_listfiles) | wc -l` -eq 0 \
-	  || { echo "ERROR: files left in build directory after distclean:" ; \
-	       $(distcleancheck_listfiles) ; \
-	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
 all-am: Makefile
@@ -787,6 +779,8 @@ uninstall-am:
 	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
 	ps ps-am tags tags-recursive uninstall uninstall-am
 
+distcleancheck:
+	@:
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

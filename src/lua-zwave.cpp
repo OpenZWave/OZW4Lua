@@ -466,3 +466,6 @@ luabind::object luaGetAssociations(Manager *, uint32 _homeId, uint8 _nodeId, uin
 	}
 	return result;
 }
+std::string OZW4Lua::getVersion() {
+    return std::string(VERSION);
+}

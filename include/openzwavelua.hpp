@@ -33,6 +33,7 @@ class OZW4Lua {
 	  void setLogCB(logCallBack cb);
 	  bool InitManager(OpenZWave::Manager *Manager, std::string filename);
 	  bool DoNotification(OpenZWave::Notification const *);
+	  std::string getVersion();
 	protected:
           lua_State* L;
 	private:

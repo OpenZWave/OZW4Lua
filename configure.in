@@ -2,7 +2,9 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT(Open-Zwave-Lua, 0.1)
+AC_INIT(Open-Zwave-Lua, 
+	[m4_normalize(esyscmd([autotools/ozw4lua_get_version.sh VERSION --base]))],
+	[http://www.dynam.ac/], [ozw4lua])
 AC_CONFIG_AUX_DIR(autotools)
 AC_CONFIG_SRCDIR([src/lua-zwave.cpp])
 AC_CONFIG_HEADER([include/config.h])
@@ -12,6 +14,42 @@ AM_INIT_AUTOMAKE(silent-rules)
 AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE
 #AC_MSG_HEADER([Configuring Core Now])
+
+# Make configure depend on the VERSION file, since it's used in AC_INIT
+AC_SUBST([CONFIGURE_DEPENDENCIES], ['$(top_srcdir)/VERSION'])
+
+# Get the version of ozw4lua that we are installing
+AC_MSG_CHECKING([for ozw4lua version])
+OZW4LUA_VERSION="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION`"
+OZW4LUA_MAJOR_VERSION="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION --major`"
+OZW4LUA_MINOR_VERSION="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION --minor`"
+OZW4LUA_RELEASE_VERSION="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION --release`"
+OZW4LUA_REPO_REV="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION --repo-rev`"
+OZW4LUA_RELEASE_DATE="`$srcdir/autotools/ozw4lua_get_version.sh $srcdir/VERSION --release-date`"
+AC_SUBST(OZW4LUA_VERSION)
+AC_SUBST(OZW4LUA_SVN_R)
+AC_SUBST(OZW4LUA_RELEASE_DATE)
+AC_DEFINE_UNQUOTED([OZW4LUA_MAJOR_VERSION], [$OZW4LUA_MAJOR_VERSION],
+    [Major version of ozw4lua])
+AC_DEFINE_UNQUOTED([OZW4LUA_MINOR_VERSION], [$OZW4LUA_MINOR_VERSION],
+    [Minor version of ozw4lua])
+AC_DEFINE_UNQUOTED([OZW4LUA_RELEASE_VERSION], [$OZW4LUA_RELEASE_VERSION],
+    [Release version of ozw4lua])
+AC_MSG_RESULT([$OZW4LUA_VERSION])
+
+
+# Override/fixup the version numbers set by AC_INIT, since on
+# developer builds, there's no good way to know what the version is
+# before running configure :(.  We only use the base version number
+# (ie, no svn r numbers) for the version set in AC_INIT.  This will
+# always match reality because we add the VERSION file (the only way
+# to change the major.minor.release{greek}) into the configure
+# dependencies.
+
+PACKAGE_VERSION="$OZW4LUA_VERSION"
+PACKAGE_STRING="${PACKAGE_NAME} ${PACKAGE_VERSION}"
+VERSION="${PACKAGE_VERSION}"
+
 
 AC_LIBTOOL_DLOPEN
 dnl AC_DISABLE_SHARED

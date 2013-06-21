@@ -96,18 +96,18 @@ else
             if test "$HWLOC_REPO_REV" = "-1" ; then
 
                 if test -d "$srcdir/.svn" ; then
-                    HWLOC_REPO_REV=r`svnversion "$srcdir"`
+                    HWLOC_REPO_REV=svn-`svnversion "$srcdir"`
                 elif test -d "$srcdir/.hg" ; then
-                    HWLOC_REPO_REV=hg`hg -v -R "$srcdir" tip | grep changeset | cut -d: -f3`
+                    HWLOC_REPO_REV=hg-`hg -v -R "$srcdir" tip | grep changeset | cut -d: -f3`
                 elif test -d "$srcdir/.git" ; then
-                    HWLOC_REPO_REV=git`git log -1 "$srcdir" | grep commit | awk '{ print $2 }'`
+                    HWLOC_REPO_REV=git-`git log -1 --pretty=format:%h "$srcdir"`
                 fi
                 if test "HWLOC_REPO_REV" = ""; then
                     HWLOC_REPO_REV=date`date '+%m%d%Y'`
                 fi
 
             fi
-            HWLOC_VERSION="${HWLOC_VERSION}${HWLOC_REPO_REV}"
+            HWLOC_VERSION="${HWLOC_VERSION}-${HWLOC_REPO_REV}"
         fi
     fi
 

@@ -49,6 +49,15 @@
    */
 #undef LT_OBJDIR
 
+/* Major version of ozw4lua */
+#undef OZW4LUA_MAJOR_VERSION
+
+/* Minor version of ozw4lua */
+#undef OZW4LUA_MINOR_VERSION
+
+/* Release version of ozw4lua */
+#undef OZW4LUA_RELEASE_VERSION
+
 /* Name of package */
 #undef PACKAGE
 

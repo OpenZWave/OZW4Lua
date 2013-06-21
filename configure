@@ -16024,12 +16024,8 @@ fi
 $as_echo "$ac_cv_lib_luabind_open" >&6; }
 if test "x$ac_cv_lib_luabind_open" = xyes; then :
   LUABIND_LIB="-lluabind"
-fi
-
-
-ac_fn_cxx_check_header_mongrel "$LINENO" "openzwave/Manager.h" "ac_cv_header_openzwave_Manager_h" "$ac_includes_default"
-if test "x$ac_cv_header_openzwave_Manager_h" = xyes; then :
-
+else
+  as_fn_error $? "No LuaBind Library Found" "$LINENO" 5
 fi
 
 
@@ -16071,6 +16067,8 @@ fi
 $as_echo "$ac_cv_lib_udev_main" >&6; }
 if test "x$ac_cv_lib_udev_main" = xyes; then :
   UDEV_LIB="-ludev"
+else
+  as_fn_error $? "Can't find libudev" "$LINENO" 5
 fi
 
 
@@ -16106,6 +16104,8 @@ fi
 $as_echo "$ac_cv_lib_tinyxml_main" >&6; }
 if test "x$ac_cv_lib_tinyxml_main" = xyes; then :
   TXML_LIB="-ltinyxml"
+else
+  as_fn_error $? "Can't find libtinyxml" "$LINENO" 5
 fi
 
 
@@ -16141,10 +16141,12 @@ fi
 $as_echo "$ac_cv_lib_openzwave_main" >&6; }
 if test "x$ac_cv_lib_openzwave_main" = xyes; then :
   OZW_LIB="-lopenzwave"
+else
+  as_fn_error $? "Can't find libopenzwave" "$LINENO" 5
 fi
 
 
-CPPFLAGS="$CXXFLAGS -I/usr/include/openzwave/"
+CPPFLAGS="$CPPFLAGS -I/usr/include/openzwave/ -I/usr/include/openzwave/value_classes/ -I/usr/include/openzwave/command_classes/ -I/usr/include/openzwave/platform/"
 ac_fn_cxx_check_header_mongrel "$LINENO" "Manager.h" "ac_cv_header_Manager_h" "$ac_includes_default"
 if test "x$ac_cv_header_Manager_h" = xyes; then :
 

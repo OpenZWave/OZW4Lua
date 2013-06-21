@@ -67,17 +67,16 @@ AX_LUA_LIBS
 
 AC_LANG_PUSH(C++)
 AC_CHECK_HEADER([luabind/luabind.hpp])
-AC_CHECK_LIB(luabind, open, [LUABIND_LIB="-lluabind"])
+AC_CHECK_LIB(luabind, open, [LUABIND_LIB="-lluabind"], [AC_MSG_ERROR([No LuaBind Library Found])])
 AC_SUBST(LUABIND_LIB)
-AC_CHECK_HEADER([openzwave/Manager.h])
 AC_LANG_CPLUSPLUS
-AC_CHECK_LIB(udev, main, [UDEV_LIB="-ludev"])
+AC_CHECK_LIB(udev, main, [UDEV_LIB="-ludev"], [AC_MSG_ERROR([Can't find libudev])])
 AC_SUBST(UDEV_LIB)
-AC_CHECK_LIB(tinyxml, main, [TXML_LIB="-ltinyxml"])
+AC_CHECK_LIB(tinyxml, main, [TXML_LIB="-ltinyxml"], [AC_MSG_ERROR([Can't find libtinyxml])])
 AC_SUBST(TXML_LIB)
-AC_CHECK_LIB(openzwave, main, [OZW_LIB="-lopenzwave"], [], [$UDEV_LIB $TXML_LIB])
+AC_CHECK_LIB(openzwave, main, [OZW_LIB="-lopenzwave"], [AC_MSG_ERROR([Can't find libopenzwave])], [$UDEV_LIB $TXML_LIB])
 AC_SUBST(OZW_LIB)
-CPPFLAGS="$CXXFLAGS -I/usr/include/openzwave/"
+CPPFLAGS="$CPPFLAGS -I/usr/include/openzwave/ -I/usr/include/openzwave/value_classes/ -I/usr/include/openzwave/command_classes/ -I/usr/include/openzwave/platform/"
 AC_CHECK_HEADER([Manager.h])
 
 AC_LANG_POP(C++)

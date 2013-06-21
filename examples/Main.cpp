@@ -2,18 +2,18 @@
 //
 //	Main.cpp
 //
-//	Minimal application to test OpenZWave.
+//	Minimal application to test OpenZWave for Lua.
 //
 //	Creates an OpenZWave::Driver and the waits.  In Debug builds
 //	you should see verbose logging to the console, which will
 //	indicate that communications with the Z-Wave network are working.
 //
 //	Copyright (c) 2010 Mal Lansell <mal@openzwave.com>
-//
+//	Copyright (c) 2013 Justin Hammond <justin@dynam.ac>
 //
 //	SOFTWARE NOTICE AND LICENSE
 //
-//	This file is part of OpenZWave.
+//	This file was taken from OpenZWave.
 //
 //	OpenZWave is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU Lesser General Public License as published

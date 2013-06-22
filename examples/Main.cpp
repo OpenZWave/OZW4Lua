@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <iostream>
 #include <Options.h>
 #include <Manager.h>
 #include <Driver.h>

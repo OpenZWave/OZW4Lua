@@ -65,7 +65,7 @@ namespace luabind {
 
 OZW4Lua::OZW4Lua() {
     this->Self = this;
-    this->L = lua_open();
+    this->L = luaL_newstate();
     luaL_openlibs(this->L);
     luabind::open(this->L);
                                             

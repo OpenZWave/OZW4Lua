@@ -1074,6 +1074,7 @@ AC_SUBST([am__untar])
 ]) # _AM_PROG_TAR
 
 m4_include([autotools/ax_lua.m4])
+m4_include([autotools/ax_pthread.m4])
 m4_include([autotools/libtool.m4])
 m4_include([autotools/ltoptions.m4])
 m4_include([autotools/ltsugar.m4])
